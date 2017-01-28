@@ -2,23 +2,23 @@
 <html>
     <head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-      
+
       <!-- vehicle api 必須 : ここから-->
-      <script src="http://52.193.125.145:3000/socket.io/socket.io.js"></script> 
-      <script src="http://52.193.125.145:3000/www/js/vehicleAPI.js"></script>
-      <script src="http://52.193.125.145:3000/www/js/vehicleAPI-client.js"></script>
+      <script src="http://13.112.91.95:3000/socket.io/socket.io.js"></script> 
+      <script src="http://13.112.91.95:3000/www/js/vehicleAPI.js"></script>
+      <script src="http://13.112.91.95:3000/www/js/vehicleAPI-client.js"></script>
       <script>
         var roomID = "YOUR.NAME.HERE@example.com"; //ユニークな文字列に変更して下さい
-        
+
         window.onload = function () {
           document.getElementById("WSRoomID").innerHTML = roomID;
           var msg = {"roomID":roomID, "data":"NOT REQUIRED"};
-          socket.emit('joinRoom', JSON.stringify(msg));        
+          socket.emit('joinRoom', JSON.stringify(msg));
         }
       </script>
       <!-- vehicle api 必須 : ここまで -->
-      
-      <script>      
+
+      <script>
 
         var zone_fr = new Zone();
         zone_fr.value = [zone_fr.Front, zone_fr.Right];
@@ -42,7 +42,7 @@
             console.log("door(front left) : " + door.status);
             document.getElementById("idDoor_fl").innerHTML = door.status;
         }, zone_fl);
-        
+
       </script>
     </head>
     <body>

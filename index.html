@@ -4,6 +4,21 @@
   <meta charset="UTF-8">
   <title>Document</title>
   <link rel="stylesheet" href="">
+  <!-- vehicle api 必須 : ここから-->
+  <script src="http://13.112.91.95:3000/socket.io/socket.io.js"></script>
+  <script src="http://13.112.91.95:3000/www/js/vehicleAPI.js"></script>
+  <script src="http://13.112.91.95:3000/www/js/vehicleAPI-client.js"></script>
+
+  <script>
+    var roomID = "YOUR.NAME.HERE@example.com"; //ユニークな文字列に変更して下さい
+
+    window.onload = function () {
+      document.getElementById("WSRoomID").innerHTML = roomID;
+      var msg = {"roomID":roomID, "data":"NOT REQUIRED"};
+      socket.emit('joinRoom', JSON.stringify(msg));
+    }
+  </script>
+  <!-- vehicle api 必須 : ここまで -->
 </head>
 <body>
   <link rel="stylesheet" href="http://localhost:4000/style.css">
