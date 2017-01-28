@@ -3,11 +3,12 @@ $(document).ready(function()
   var ids = [0];
   var isBgChange = false;
   var isPhantascopeUp = false;
+  var parent = document.getElementById('parent');
 
   function phantascope_up()
   {
     $('.sprite').phantascope({
-      fps: 14,
+      fps: 1000,
       loop: "*",
       layout: [3, 3, 3,1],
       animationPoints:[[1,1],[1,4]],
@@ -26,24 +27,27 @@ $(document).ready(function()
     {
       bg_change();
     }
-    var body = document.body;
-    body.appendChild(el);
+    counter_up();
+    parent.appendChild(el);
     return el;
   }
 
+  function counter_up(){
+    document.getElementById('counter').innerHTML = ids.length;
+  }
   // 村人追加時の空から降ってくる挙動
   function init_move(id)
   {
-    var left = Math.floor(Math.random() * 80) + 10;
+    var left = Math.floor(Math.random() * 96);
     $('#'+ id).css({
-      'bottom': '75em',
+      'bottom': '100%',
       'left'  : left + '%'
     });
-    left2 =  Math.floor(Math.random() * 80) + 10;
+    left2 =  Math.floor(Math.random() * 96);
     $('#'+ id).animate({
       'bottom':'0',
       'left': left2 + '%'
-    }, 5000);
+    }, 2000);
   }
 
   // 村人の動作設定
@@ -51,17 +55,17 @@ $(document).ready(function()
   {
     setInterval(function()
     {
-      var rand_left = Math.floor( Math.random() * 1800 ) ;
-      var rand_bottom = Math.floor( Math.random() * 300 ) ;
+      var rand_left = Math.floor( Math.random() * 96 ) ;
+      var rand_bottom = Math.floor( Math.random() * 30 ) ;
       if($('#' + id).hasClass('reflect')) {
         $('#'+ id).removeClass('reflect').animate({
-          'bottom': rand_bottom,
-          'left':rand_left
+          'bottom': rand_bottom + '%',
+          'left':rand_left + '%'
         },3000);
       }else{
         $('#'+ id).addClass('reflect').animate({
-          'bottom':rand_bottom,
-          'left':rand_left
+          'bottom':rand_bottom + '%',
+          'left':rand_left + '%'
         }, 3000);
       }
     }, Math.floor(Math.random() * 4000) + 500);
@@ -79,7 +83,7 @@ $(document).ready(function()
         isPhantascopeUp = true;
       }
       play();
-  }, Math.floor(Math.random() * 10) + 10);
+  }, Math.floor(Math.random() * 1) + 1);
 
   // phantascope開始用method
   function play()
@@ -90,6 +94,8 @@ $(document).ready(function()
   // 背景変更method
   function bg_change()
   {
-    $('.parent').css({'background-image': 'url("http://localhost:4000/bg2.jpeg")'});
+    $('.bg1').fadeOut('slow', function() {
+      $('.bg2').fadeIn('slow');
+    });
   }
 });

@@ -6,10 +6,24 @@
 </head>
 <body>
   <link rel="stylesheet" href="http://localhost:4000/style.css">
-  <div id="parent"></div>
+  <div class="header">
+    <h1>DEMO</h1>
+    <div class="header_border1"></div>
+    <div class="header_border2"></div>
+  </div>
+  <div id="parent">
+    <div class="bg1"></div>
+    <div class="bg2" style="display: none;"></div>
+  </div>
+  <div class="footer">
+    <div class="counter_area">
+      <div class=" counter_title">現在の人口</div>
+      <div class="counter_box"><span id="counter">0</span>人</div>
+    </div>
+  </div>
   <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
   <script src="jquery.phantascope.js"></script>
-  <!-- <script src="http://localhost:4000/move.js"></script> -->
+  <script src="http://localhost:4000/move.js"></script>
   <script src="http://localhost:4000/vehicle.js"></script>
   <!-- vehicle api 必須 : ここから-->
   <script src="http://13.112.91.95:3000/socket.io/socket.io.js"></script>

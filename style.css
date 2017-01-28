@@ -1,11 +1,68 @@
-
-.parent {
-  background-image: url("http://localhost:4000/bg1.jpeg");
-  background-repeat: no-repeat;
-  background-size: 100%;
-  height: 70em;
+body{
+  background-color: #f56d1f;
+  height: 1020px;
+  margin: 0;
+  width: 100%;
+}
+.header, .footer {
+  background-color: #333;
+  color: #FFF;
+  height: 4em;
   position: relative;
   width: 100%;
+  z-index: 1;
+}
+.header h1 {
+  line-height: 2em;
+  margin-top: 0;
+  padding-left: 3%;
+  position: relative;
+  z-index: 2;
+}
+.header_border1, .header_border2 {
+  border: 1px solid #f56d1f;
+  position: absolute;
+  width: 4%;
+}
+.header_border1 {
+  right: 0;
+  top: 1.5em;
+}
+.header_border2 {
+  right: 0;
+  top: 2.5em;
+}
+.footer .counter_area {
+  line-height: 4em;
+  padding: 0 2%;
+}
+.footer .counter_title {
+  display: inline-block;
+}
+.footer .counter_box {
+  display: inline-block;
+}
+.footer #counter {
+  font-size: 2em;
+}
+.bg1 {
+  background-image: url("http://localhost:4000/bg1.jpeg");
+}
+.bg2 {
+  background-image: url("http://localhost:4000/bg2.jpeg");
+}
+.bg1, .bg2 {
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 100%;
+  width: 100%;
+}
+#parent {
+  background-color: #000;
+  height: 88%;
+  margin: 0 auto;
+  position: relative;
+  width: 98%;
 }
 .reflect {
   -ms-transform : scaleX(-1);
@@ -22,3 +79,12 @@
   position: absolute;
   width: 106.666667px;
 }
+/*.sprite {
+  background-image: url(http://localhost:4000/img.png);
+  background-repeat: no-repeat;
+  background-size: 160px;
+  bottom: 0;
+  height: 40px;
+  position: absolute;
+  width: 53.333335px;
+}*/
