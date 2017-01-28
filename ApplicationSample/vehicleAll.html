@@ -23,7 +23,7 @@
 
       <script>
         //var roomID = "YOUR.NAME.HERE@example.com"; //ユニークな文字列に変更して下さい
-        var roomID = "aaaaaaaa";
+        var roomID = "team-h";
 
         window.onload = function () {
           document.getElementById("WSRoomID").innerHTML = roomID;
@@ -82,6 +82,11 @@
         });
         var odometerSub = navigator.vehicle.odometer.subscribe(function(obj) {
           document.getElementById("odometer").innerHTML = obj.distanceTotal;
+        });
+        var distance = 0;
+        var odometerSub2 = navigator.vehicle.vehicleSpeed.subscribe(function(obj) {
+          distance += Math.floor(obj.speed /3600);
+          document.getElementById("odometer2").innerHTML = distance;
         });
 
         var parkingBrakeSub = navigator.vehicle.parkingBrake.subscribe(function(obj) {
@@ -142,6 +147,7 @@
       <div><span class="clsLabel">steering-angle:</span> <span id="steeringWheel"> </span> [degree]</div>
       <div><span class="clsLabel">brakePedal:</span> <span id="brake"> </span> [%]</div>
       <div><span class="clsLabel">odometer-totaldist:</span> <span id="odometer"> </span> [km]</div>
+      <div><span class="clsLabel">odometer-totaldist2:</span> <span id="odometer2"> </span> [m]</div>
       <div><span class="clsLabel">parking-brake:</span> <span id="parkingBrake"> </span> [on/off]</div>
 
       <div><span class="clsLabel">gps-latitude:</span> <span id="gps-latitude"> </span> [degree]</div>
