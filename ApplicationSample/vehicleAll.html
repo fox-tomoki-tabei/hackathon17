@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <style type="text/css">
+        span {
+          display:inline-block;
+          width:150px;
+        }
+        span.clsLabel {
+          background-color:grey;
+          display:inline-block;
+          height:15px;
+          width:200px;
+        }
+      </style>
+
+      <!-- vehicle api 必須 : ここから-->
+      <script src="http://52.193.60.25:3000/socket.io/socket.io.js"></script>
+      <script src="http://52.193.60.25:3000/www/js/vehicleAPI.js"></script>
+      <script src="http://52.193.60.25:3000/www/js/vehicleAPI-client.js"></script>
+
+      <script>
+        //var roomID = "YOUR.NAME.HERE@example.com"; //ユニークな文字列に変更して下さい
+        var roomID = "aaaaaaaa";
+
+        window.onload = function () {
+          document.getElementById("WSRoomID").innerHTML = roomID;
+          var msg = {"roomID":roomID, "data":"NOT REQUIRED"};
+          socket.emit('joinRoom', JSON.stringify(msg));
+        }
+      </script>
+      <!-- vehicle api 必須 : ここまで -->
+
+      <script>
+        var vehicleSpeedSub = navigator.vehicle.vehicleSpeed.subscribe(function(obj) {
+          document.getElementById("vehicleSpeed").innerHTML = Math.floor(obj.speed /1000);
+        });
+        var engineSpeedSub = navigator.vehicle.engineSpeed.subscribe(function(obj) {
+          document.getElementById("engineSpeed").innerHTML = obj.speed /1000;
+        });
+
+        var vpmtSub = navigator.vehicle.vehiclePowerModeType.subscribe(function(obj) {
+          document.getElementById("vehiclePowerModeType").innerHTML = obj.value;
+        });
+        var accPedalSub = navigator.vehicle.acceleratorPedalPosition.subscribe(function(obj) {
+          document.getElementById("accelerationPedalPosition").innerHTML = obj.value;
+        });
+        var transmissionSub = navigator.vehicle.transmission.subscribe(function(obj) {
+          document.getElementById("transmission-mode").innerHTML = obj.mode;
+        });
+
+        var lightStatSub = navigator.vehicle.lightStatus.subscribe(function(obj) {
+          document.getElementById("lightStatus-head").innerHTML = obj.head;
+          document.getElementById("lightStatus-brake").innerHTML = obj.brake;
+          document.getElementById("lightStatus-parking").innerHTML = obj.parking;
+        });
+
+        var fuelSub = navigator.vehicle.fuel.subscribe(function(obj) {
+          document.getElementById("fuel-level").innerHTML = obj.level;
+          document.getElementById("fuel-instantConsumption").innerHTML = obj.instantConsumption;
+        });
+
+        var accelSub = navigator.vehicle.acceleration.subscribe(function(obj) {
+          document.getElementById("acceleration-x").innerHTML = obj.x;
+          document.getElementById("acceleration-y").innerHTML = obj.y;
+          document.getElementById("acceleration-z").innerHTML = obj.z;
+        });
+
+        var accelSub = navigator.vehicle.gyro.subscribe(function(obj) {
+          document.getElementById("gyro-pitch").innerHTML = obj.pitchRate;
+          document.getElementById("gyro-roll").innerHTML = obj.rollRate;
+          document.getElementById("gyro-yaw").innerHTML = obj.yawRate;
+        });
+
+        var steerSub = navigator.vehicle.steeringWheel.subscribe(function(obj) {
+          document.getElementById("steeringWheel").innerHTML = obj.angle;
+        });
+        var brakeSub = navigator.vehicle.brakeOperation.subscribe(function(obj) {
+          document.getElementById("brake").innerHTML = obj.brakePedalDepressed;
+        });
+        var odometerSub = navigator.vehicle.odometer.subscribe(function(obj) {
+          document.getElementById("odometer").innerHTML = obj.distanceTotal;
+        });
+
+        var parkingBrakeSub = navigator.vehicle.parkingBrake.subscribe(function(obj) {
+          document.getElementById("parkingBrake").innerHTML = obj.status;
+        });
+        var parkingBrakeSub = navigator.vehicle.location.subscribe(function(obj) {
+          document.getElementById("gps-latitude").innerHTML = Math.floor(obj.latitude*1000)/1000;
+          document.getElementById("gps-longitude").innerHTML = Math.floor(obj.longitude*1000)/1000;
+          document.getElementById("gps-altitude").innerHTML = Math.floor(obj.altitude*1000)/1000;
+          document.getElementById("gps-heading").innerHTML = Math.floor(obj.heading*1000)/1000;
+          document.getElementById("gps-speed").innerHTML = Math.floor(obj.speed*1000)/1000;
+        });
+
+        var zone_fr = new Zone();
+        zone_fr.value = [zone_fr.Front, zone_fr.Right];
+        var zone_fl = new Zone();
+        zone_fl.value = [zone_fr.Front, zone_fr.Left];
+
+        var door_fr = navigator.vehicle.door.subscribe(function(obj) {
+            document.getElementById("door-status-fr").innerHTML = obj.status;
+        }, zone_fr);
+        var door_fr = navigator.vehicle.door.subscribe(function(obj) {
+            document.getElementById("door-status-fl").innerHTML = obj.status;
+        }, zone_fl);
+
+        var seat_fr = navigator.vehicle.seat.subscribe(function(obj) {
+            document.getElementById("seatbelt_fr").innerHTML = obj.seatbelt;
+        }, zone_fr);
+
+      </script>
+    </head>
+    <body>
+      <div>
+        Room ID:<span id="WSRoomID"> </span>
+      </div>
+
+      <h2> Vehicle Data</h2>
+      <div><span class="clsLabel">vehicleSpeed:</span> <span id="vehicleSpeed"> </span> [km/h]</div>
+      <div><span class="clsLabel">engineSpeed:</span> <span id="engineSpeed"> </span> [rpm]</div>
+      <div><span class="clsLabel">powerMode:</span> <span id="vehiclePowerModeType"> </span> [off/running]</div>
+
+
+      <div><span class="clsLabel">accelPosition:</span> <span id="accelerationPedalPosition"> </span> [%]</div>
+      <div><span class="clsLabel">transmission-mode:</span> <span id="transmission-mode"> </span> [type]</div>
+      <div><span class="clsLabel">light-head:</span> <span id="lightStatus-head"> </span> [true/false]</div>
+      <div><span class="clsLabel">light-brake:</span> <span id="lightStatus-brake"> </span> [true/false]</div>
+      <div><span class="clsLabel">light-parking:</span> <span id="lightStatus-parking"> </span> [true/false]</div>
+      <div><span class="clsLabel">fuel-level:</span> <span id="fuel-level"> </span> [%]</div>
+      <div><span class="clsLabel">instConsumption:</span> <span id="fuel-instantConsumption"> </span> [g/sec]</div>
+      <div><span class="clsLabel">acc-X:</span> <span id="acceleration-x"> </span> [G]</div>
+      <div><span class="clsLabel">acc-Y:</span> <span id="acceleration-y"> </span> [G]</div>
+      <div><span class="clsLabel">acc-Z:</span> <span id="acceleration-z"> </span> [G]</div>
+
+      <div><span class="clsLabel">gyro-pitch:</span> <span id="gyro-pitch"> </span> [deg/sec]</div>
+      <div><span class="clsLabel">gyro-roll:</span> <span id="gyro-roll"> </span> [deg/sec]</div>
+      <div><span class="clsLabel">gyro-yaw:</span> <span id="gyro-yaw"> </span> [deg/sec]</div>
+
+      <div><span class="clsLabel">steering-angle:</span> <span id="steeringWheel"> </span> [degree]</div>
+      <div><span class="clsLabel">brakePedal:</span> <span id="brake"> </span> [%]</div>
+      <div><span class="clsLabel">odometer-totaldist:</span> <span id="odometer"> </span> [km]</div>
+      <div><span class="clsLabel">parking-brake:</span> <span id="parkingBrake"> </span> [on/off]</div>
+
+      <div><span class="clsLabel">gps-latitude:</span> <span id="gps-latitude"> </span> [degree]</div>
+      <div><span class="clsLabel">gps-longitude:</span> <span id="gps-longitude"> </span> [degree]</div>
+      <div><span class="clsLabel">gps-altitude:</span> <span id="gps-altitude"> </span> [m]</div>
+      <div><span class="clsLabel">gps-heading:</span> <span id="gps-heading"> </span> [degree]</div>
+      <div><span class="clsLabel">gps-speed:</span> <span id="gps-speed"> </span> [km/h]</div>
+
+      <div><span class="clsLabel">door-front-right:</span> <span id="door-status-fr"> </span> [close/open]</div>
+      <div><span class="clsLabel">door-front-left:</span> <span id="door-status-fl"> </span> [closse/open]</div>
+      <div><span class="clsLabel">seetbelt-front-right:</span> <span id="seatbelt_fr"> </span> [true/false]</div>
+
+    </body>
+</html>

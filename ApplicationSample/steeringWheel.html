@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+      <!-- vehicle api 必須 : ここから-->
+      <script src="http://52.193.125.145:3000/socket.io/socket.io.js"></script> 
+      <script src="http://52.193.125.145:3000/www/js/vehicleAPI.js"></script>
+      <script src="http://52.193.125.145:3000/www/js/vehicleAPI-client.js"></script>
+
+      <script>
+        var roomID = "YOUR.NAME.HERE@example.com"; //ユニークな文字列に変更して下さい
+        
+        window.onload = function () {
+          document.getElementById("WSRoomID").innerHTML = roomID;
+          var msg = {"roomID":roomID, "data":"NOT REQUIRED"};
+          socket.emit('joinRoom', JSON.stringify(msg));        
+        }
+      </script>
+      <!-- vehicle api 必須 : ここまで -->
+      
+      <script>
+          var getSteeringWheel = function() {
+              navigator.vehicle.steeringWheel.get().then(function(steeringWheel) {
+                  console.log("steeringWheel angle : " + steeringWheel.angle);
+                  document.getElementById("SteeringWheel").innerHTML = Math.floor(steeringWheel.angle);
+              },
+              function(error) {
+                  console.log("get steeringWheel error : " + error);   
+              });
+          }
+      </script>
+    </head>
+    <body>
+      <div>
+        Room ID:<span id="WSRoomID"> </span>
+      </div>
+      <div>
+        <button type="button" onclick="getSteeringWheel()">get SteeringWheel Angle</button><br>
+        SteeringWheel:<span id="SteeringWheel"> </span> [degree]
+      </div>
+    </body>
+</html>

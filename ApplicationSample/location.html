@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+      <!-- vehicle api 必須 : ここから--> 
+      <script src="http://52.193.60.25:3000/socket.io/socket.io.js"></script>
+      <script src="http://52.193.60.25:3000/www/js/vehicleAPI.js"></script>
+      <script src="http://52.193.60.25:3000/www/js/vehicleAPI-client.js"></script>
+      <!-- vehicle api 必須 : ここまで -->
+
+      <!-- Map -->
+      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+      <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+      <script type="text/javascript" src="./js/map.js"></script>
+      <style>
+        #map{
+            width:500px;
+            height:430px;
+        }
+      </style>
+
+      <!-- vehicle api 必須 : ここから-->
+      <script>
+        //var roomID = "YOUR.NAME.HERE@example.com";
+        var roomID = "aaaaaaaa";
+
+        window.onload = function () {
+          document.getElementById("WSRoomID").innerHTML = roomID;
+          var msg = {"roomID":roomID, "data":"NOT REQUIRED"};
+          socket.emit('joinRoom', JSON.stringify(msg));
+        }
+      </script>
+      <!-- vehicle api 必須 : ここまで -->
+
+      <script>
+        var gVehicleSpeed = 0;
+        var gEngineSpeed = 0;
+        var vehicleSpeedSub = navigator.vehicle.vehicleSpeed.subscribe(function(vehicleSpeed) {
+          gVehicleSpeed = Math.floor(vehicleSpeed.speed /1000);
+        });
+        var engineSpeedSub = navigator.vehicle.engineSpeed.subscribe(function(engineSpeed) {
+          gEngineSpeed = Math.floor(engineSpeed.speed /1000);
+        });
+
+        var locationSub = navigator.vehicle.location.subscribe(function(location) {
+        var oldLatitude;
+        var oldLongitude;
+
+        if(oldLatitude === undefined || oldLongitude === undefined){
+          //初回
+          oldLatitude = location.latitude;
+          oldLongitude = location.longitude;
+        } else if(oldLatitude === location.latitude && oldLongitude === location.longitude) {
+          //前回と位置が同じ : do nothing
+          return;
+        } else {
+          //前回と位置が異なる 
+          oldLatitude = location.latitude;
+          oldLongitude = location.longitude;
+        }
+        addMarker2(gVehicleSpeed, gEngineSpeed, location.latitude, location.longitude);
+      });
+      </script>
+    </head>
+    <body onload="initMap(); ">
+      <div>
+        Room ID:<span id="WSRoomID"> </span>
+      </div>
+
+      <div id="map"></div>
+    </body>
+</html>
