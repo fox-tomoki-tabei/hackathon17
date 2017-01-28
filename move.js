@@ -16,15 +16,39 @@ $(document).ready(function()
     play();
   }
 
+  // 村人追加における要素の追加
+  function add(){
+    ids.push(ids.length + 1);
+    var el = document.createElement('div');
+    el.classList.add("sprite");
+    el.id = ids.length + 1;
+    if(ids.length === 300)
+    {
+      bg_change();
+    }
+    var body = document.body;
+    body.appendChild(el);
+    return el;
+  }
+
+  // 村人追加時の空から降ってくる挙動
+  function init_move(id)
+  {
+    var left = Math.floor(Math.random() * 80) + 10;
+    $('#'+ id).css({
+      'bottom': '75em',
+      'left'  : left + '%'
+    });
+    left2 =  Math.floor(Math.random() * 80) + 10;
+    $('#'+ id).animate({
+      'bottom':'0',
+      'left': left2 + '%'
+    }, 5000);
+  }
+
+  // 村人の動作設定
   function move(id)
   {
-    init_rand_left = Math.floor(Math.random() * 1800);
-    init_rand_bottom = Math.floor(Math.random() * 300);
-    $('#'+ id).animate({
-      'bottom':init_rand_bottom,
-      'left':init_rand_left
-    }, 3000);
-
     setInterval(function()
     {
       var rand_left = Math.floor( Math.random() * 1800 ) ;
@@ -43,48 +67,27 @@ $(document).ready(function()
     }, Math.floor(Math.random() * 4000) + 500);
   }
 
-  function init_move(id)
-  {
-    $('#'+ id).css({
-      'bottom': '45em'
-    });
-    $('#'+ id).animate({
-      'bottom':'0',
-      'left': '50%'
-    }, 3000);
-  }
-
-  function add(){
-    ids.push(ids.length + 1);
-    var el = document.createElement('div');
-    el.classList.add("sprite");
-    el.id = ids.length + 1;
-    if(ids.length === 300)
-    {
-      bg_change();
-    }
-    var body = document.body;
-    body.appendChild(el);
-    init_move(el.id);
-    move(el.id);
-  }
-
+  // 一時的な村人追加用method
   setInterval(function()
   {
-      add();
+      var el = add();
+      init_move(el.id);
+      move(el.id);
       if(!isPhantascopeUp)
       {
         phantascope_up();
         isPhantascopeUp = true;
       }
       play();
-  }, Math.floor(Math.random() * 4000) + 500);
+  }, Math.floor(Math.random() * 10) + 10);
 
+  // phantascope開始用method
   function play()
   {
       $('.sprite').phantascope('play');
   }
 
+  // 背景変更method
   function bg_change()
   {
     $('.parent').css({'background-image': 'url("http://localhost:4000/bg2.jpeg")'});
