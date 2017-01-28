@@ -3,29 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
-  <link rel="stylesheet" href="">
+</head>
+<body>
+  <link rel="stylesheet" href="http://localhost:4000/style.css">
+  <div id="parent"></div>
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+  <script src="jquery.phantascope.js"></script>
+  <!-- <script src="http://localhost:4000/move.js"></script> -->
+  <script src="http://localhost:4000/vehicle.js"></script>
   <!-- vehicle api 必須 : ここから-->
   <script src="http://13.112.91.95:3000/socket.io/socket.io.js"></script>
   <script src="http://13.112.91.95:3000/www/js/vehicleAPI.js"></script>
   <script src="http://13.112.91.95:3000/www/js/vehicleAPI-client.js"></script>
-
-  <script>
-    var roomID = "YOUR.NAME.HERE@example.com"; //ユニークな文字列に変更して下さい
-
-    window.onload = function () {
-      document.getElementById("WSRoomID").innerHTML = roomID;
-      var msg = {"roomID":roomID, "data":"NOT REQUIRED"};
-      socket.emit('joinRoom', JSON.stringify(msg));
-    }
-  </script>
+  <script src="http://localhost:4000/room.js"></script>
   <!-- vehicle api 必須 : ここまで -->
-</head>
-<body>
-  <link rel="stylesheet" href="http://localhost:4000/style.css">
-  <div class="parent"></div>
-  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
-  <script src="jquery.phantascope.js"></script>
-  <script src="http://localhost:4000/move.js"></script>
-  <script src="http://localhost:4000/vehicle.js"></script>
 </body>
 </html>
