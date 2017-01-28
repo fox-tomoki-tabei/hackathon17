@@ -1,0 +1,14 @@
+  .parent {
+    position: relative;
+  }
+  .reflect {
+    -webkit-transform: scaleX(-1);
+  }
+  .sprite {
+    background-image: url(http://localhost:4000/img.png);
+    background-repeat: no-repeat;
+    background-size: 320px;
+    position: absolute;
+    height: 80px;
+    width: 106.666667px;
+  }
