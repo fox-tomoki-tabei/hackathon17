@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-  var ids = [0];
+  var ids = [];
   var isBgChange = false;
   var isPhantascopeUp = false;
   var parent = document.getElementById('parent');
@@ -27,7 +27,6 @@ $(document).ready(function()
     {
       bg_change();
     }
-    counter_up();
     parent.appendChild(el);
     return el;
   }
@@ -75,21 +74,25 @@ $(document).ready(function()
   // 一時的な村人追加用method
   setInterval(function()
   {
-      var el = add();
-      init_move(el.id);
-      move(el.id);
-      if(!isPhantascopeUp)
-      {
-        phantascope_up();
-        isPhantascopeUp = true;
-      }
-      play();
+    var el = add();
+    init_move(el.id);
+    setTimeout(function(){
+      counter_up();
+    }, 200);
+    move(el.id);
+    if(!isPhantascopeUp)
+    {
+      phantascope_up();
+      isPhantascopeUp = true;
+    }
+    counter_up();
+    play();
   }, Math.floor(Math.random() * 2000) + 500);
 
   // phantascope開始用method
   function play()
   {
-      $('.sprite').phantascope('play');
+    $('.sprite').phantascope('play');
   }
 
   // 背景変更method
