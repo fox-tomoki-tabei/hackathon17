@@ -4,11 +4,71 @@ body{
   margin: 0;
   width: 100%;
 }
+#bt{
+
+}
+.bt-start {
+  background: -webkit-gradient(linear, left top, left bottom, from(#d06262), to(#6d0101));
+  box-shadow: 0 0 8px #d4b2b2 inset;
+  border: 0.05em solid #FFF;
+  border-radius: 0.23em;
+  color: #FFF;
+  font-family: serif;
+  font-size: 3.5em;
+  font-weight: bold;
+  left: 19%;
+  margin: 0 auto;
+  position: absolute;
+  text-align: center;
+  text-shadow: 0 0 1.5em #ffffff, 0 0 3.5px #000;
+  top: 50%;
+  width: 60%;
+}
+.bt-start:hover {
+  color: #FFF;
+  background: -webkit-gradient(linear, left top, left bottom, from(#6d0101), to(#d06262));
+  box-shadow: 0 0 26px #6d0101 inset;
+  text-shadow: none;
+}
+.content{
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+.cover {
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.inner-cover{
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+.title {
+  color: #FFF;
+  font-family: serif;
+  font-size: 7em;
+  font-weight: bold;
+  margin: 0 auto;
+  position: absolute;
+  text-align: center;
+  text-shadow:  0 0 1.5em #ffffff, 0 0 1px #000, 0 0 14px #ff1e1e;
+  top: 32%;
+  width: 100%;
+  border-top: 1px solid #FFF;
+  border-bottom: 1px solid #FFF;
+  background-color: rgba(51, 51, 51, 0.8);
+}
 .header, .footer {
   background-color: #333;
+  box-shadow: 0 0 0.3em #FFF inset;
   color: #FFF;
   height: 5em;
   position: relative;
+  -webkit-box-shadow: 0 0 0.3em #FFF inset;
   width: 100%;
   z-index: 1;
 }
@@ -19,30 +79,30 @@ body{
   position: relative;
   z-index: 2;
 }
-.header_border1, .header_border2 {
+.header-border1, .header-border2 {
   border: 1px solid #f56d1f;
   position: absolute;
   width: 4%;
 }
-.header_border1 {
+.header-border1 {
   right: 0;
   top: 1.5em;
 }
-.header_border2 {
+.header-border2 {
   right: 0;
   top: 2.5em;
 }
-.footer .counter_area {
+.footer .counter-area {
   line-height: 4em;
   padding: 0 2%;
 }
-.footer .counter_title {
+.footer .counter-title {
   display: inline-block;
 }
-.footer .counter_box {
+.footer .counter-box {
   display: inline-block;
 }
-.footer #counter {
+.footer #human-counter, .footer #zombie-counter {
   font-size: 2em;
 }
 .bg1 {
@@ -71,7 +131,6 @@ body{
   transform-origin : scaleX(-1);
 }
 .sprite {
-  background-image: url(http://localhost:4000/img.png);
   background-repeat: no-repeat;
   background-size: 320px;
   bottom: 0;
@@ -79,6 +138,13 @@ body{
   position: absolute;
   width: 106.666667px;
 }
+.human {
+  background-image: url(http://localhost:4000/img.png);
+}
+.zombie {
+  background-image: url(http://localhost:4000/img2.png);
+}
+
 /*.sprite {
   background-image: url(http://localhost:4000/img.png);
   background-repeat: no-repeat;
