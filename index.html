@@ -8,17 +8,27 @@
   <link rel="stylesheet" href="http://localhost:4000/style.css">
   <div class="header">
     <h1>DEMO</h1>
-    <div class="header_border1"></div>
-    <div class="header_border2"></div>
+    <div class="header-border1"></div>
+    <div class="header-border2"></div>
   </div>
-  <div id="parent">
-    <div class="bg1"></div>
-    <div class="bg2" style="display: none;"></div>
+  <div class="content">
+    <div id="parent">
+      <div class="bg1"></div>
+      <div class="bg2" style="display: none;"></div>
+    </div>
+    <div class="cover">
+      <div class="inner-cover">
+        <div class="title">村おこし</div>
+        <div class="bt-start">START</div>
+      </div>
+    </div>
   </div>
   <div class="footer">
-    <div class="counter_area">
-      <div class=" counter_title">現在の人口</div>
-      <div class="counter_box"><span id="counter">0</span>人</div>
+    <div class="counter-area">
+      <div class=" counter-title">現在の人口</div>
+      <div class="counter-box"><span id="human-counter">0</span>人</div>
+      <div class=" counter-title">現在のゾンビ</div>
+      <div class="counter-box"><span id="zombie-counter">0</span>人</div>
     </div>
   </div>
   <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
