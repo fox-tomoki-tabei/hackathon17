@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <style type="text/css">
+        span {
+          display:inline-block;
+          width:120px;
+        }
+        span.clsLabel {
+          background-color:grey;
+          display:inline-block;
+          height:15px;
+          width:120px;
+        }
+      </style>
+
+      <!-- vehicle api 必須 : ここから-->
+      <script src="http://52.193.60.25:3000/socket.io/socket.io.js"></script>
+      <script src="http://52.193.60.25:3000/www/js/vehicleAPI.js"></script>
+      <script src="http://52.193.60.25:3000/www/js/vehicleAPI-client.js"></script>
+
+      <script>
+        //var roomID = "YOUR.NAME.HERE@example.com"; //ユニークな文字列に変更して下さい
+        var roomID = "aaaaaaaa";
+
+        window.onload = function () {
+          document.getElementById("WSRoomID").innerHTML = roomID;
+          var msg = {"roomID":roomID, "data":"NOT REQUIRED"};
+          socket.emit('joinRoom', JSON.stringify(msg));
+        }
+      </script>
+      <!-- vehicle api 必須 : ここまで -->
+
+      <script>
+        var vitalSubId = navigator.vehicle.vital.subscribe(function(vital) {
+          document.getElementById("VitalHeartrate").innerHTML = Math.floor(vital.heartrate);
+          document.getElementById("VitalEmotionCluster").innerHTML = Math.floor(vital.emotionCluster);
+        });
+        var memeSubId = navigator.vehicle.meme.subscribe(function(meme) {
+          document.getElementById("MemeEyeMoveUp").innerHTML        = meme.eyeMoveUp;
+          document.getElementById("MemeEyeMoveDown").innerHTML      = meme.eyeMoveDown;
+          document.getElementById("MemeEyeMoveRight").innerHTML     = meme.eyeMoveRight;
+          document.getElementById("MemeEyeMoveLeft").innerHTML      = meme.eyeMoveLeft;
+
+          document.getElementById("MemeBlinkSpeed").innerHTML       = meme.blinkSpeed;
+          document.getElementById("MemeBlinkStrength").innerHTML    = meme.blinkStrength;
+
+          document.getElementById("MemeRoll").innerHTML     = meme.roll;
+          document.getElementById("MemePitch").innerHTML    = meme.pitch;
+          document.getElementById("MemeYaw").innerHTML      = meme.yaw;
+
+          document.getElementById("MemeAccX").innerHTML = meme.accX;
+          document.getElementById("MemeAccY").innerHTML = meme.accY;
+          document.getElementById("MemeAccZ").innerHTML = meme.accZ;
+
+          document.getElementById("MemeTilt").innerHTML             = meme.tilt;
+          document.getElementById("MemeAttentiveness").innerHTML    = meme.attentiveness;
+          document.getElementById("MemeAwakeness").innerHTML        = meme.awakeness;
+        });
+
+      </script>
+
+    </head>
+    <body>
+      <div>
+        Room ID:<span id="WSRoomID"> </span>
+      </div>
+
+      <h2> Sensor Data</h2>
+
+      <h2> SDTech Vital data</h2>
+      <div><span class="clsLabel">
+        heartrate:</span><span id="VitalHeartrate"> </span> [bpm]
+      </div>
+      <div><span class="clsLabel">
+        emotionLevel:</span><span id="VitalEmotionCluster"> </span> [---]
+      </div>
+
+      <h2> JINS Meme Raw data</h2>
+      <div><span class="clsLabel">eyeMoveU:</span> <span id="MemeEyeMoveUp"> </span> [---]</div>
+      <div><span class="clsLabel">eyeMoveD:</span> <span id="MemeEyeMoveDown"> </span> [---]</div>
+      <div><span class="clsLabel">eyeMoveR:</span> <span id="MemeEyeMoveRight"> </span> [---]</div>
+      <div><span class="clsLabel">eyeMoveL:</span> <span id="MemeEyeMoveLeft"> </span> [---]</div>
+
+      <div><span class="clsLabel">blinkSpeed:</span> <span id="MemeBlinkSpeed"> </span> [micro volt]</div>
+      <div><span class="clsLabel">blinkStren:</span> <span id="MemeBlinkStrength"> </span> [milli sec]</div>
+
+      <div><span class="clsLabel">meme-rol:</span>  <span id="MemeRoll"> </span> [degree]</div>
+      <div><span class="clsLabel">meme-pch:</span> <span id="MemePitch"> </span> [degree]</div>
+      <div><span class="clsLabel">meme-yaw:</span>   <span id="MemeYaw"> </span> [degree]</div>
+
+      <div><span class="clsLabel">meme-accX:</span>  <span id="MemeAccX"> </span> [1/16G]</div>
+      <div><span class="clsLabel">meme-accY:</span>  <span id="MemeAccY"> </span> [1/16G]</div>
+      <div><span class="clsLabel">meme-accZ:</span>  <span id="MemeAccZ"> </span> [1/16G]</div>
+
+      <h2> JINS Meme Processed data</h2>
+      <div><span class="clsLabel">headTilt(pitch):</span> <span id="MemeTilt"> </span> [degree]</div>
+      <div><span class="clsLabel">awakeness:</span>     <span id="MemeAwakeness"> </span> [---]</div>
+      <div><span class="clsLabel">attentiveness:</span> <span id="MemeAttentiveness"> </span> [---]</div>
+    </body>
+</html>
