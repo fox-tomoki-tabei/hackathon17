@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-  var ids = [0];
+  var ids = [];
   var isBgChange = false;
   var isPhantascopeUp = false;
   var parent = document.getElementById('parent');
@@ -8,7 +8,7 @@ $(document).ready(function()
   function phantascope_up()
   {
     $('.sprite').phantascope({
-      fps: 1000,
+      fps: 10,
       loop: "*",
       layout: [3, 3, 3,1],
       animationPoints:[[1,1],[1,4]],
@@ -27,23 +27,23 @@ $(document).ready(function()
     {
       bg_change();
     }
-    counter_up();
     parent.appendChild(el);
     return el;
   }
 
+  // 人口のカウントアップ
   function counter_up(){
     document.getElementById('counter').innerHTML = ids.length;
   }
   // 村人追加時の空から降ってくる挙動
   function init_move(id)
   {
-    var left = Math.floor(Math.random() * 96);
+    var left = Math.floor(Math.random() * 91);
     $('#'+ id).css({
       'bottom': '100%',
       'left'  : left + '%'
     });
-    left2 =  Math.floor(Math.random() * 96);
+    left2 =  Math.floor(Math.random() * 91);
     $('#'+ id).animate({
       'bottom':'0',
       'left': left2 + '%'
@@ -55,7 +55,7 @@ $(document).ready(function()
   {
     setInterval(function()
     {
-      var rand_left = Math.floor( Math.random() * 96 ) ;
+      var rand_left = Math.floor( Math.random() * 91 ) ;
       var rand_bottom = Math.floor( Math.random() * 30 ) ;
       if($('#' + id).hasClass('reflect')) {
         $('#'+ id).removeClass('reflect').animate({
@@ -74,21 +74,25 @@ $(document).ready(function()
   // 一時的な村人追加用method
   setInterval(function()
   {
-      var el = add();
-      init_move(el.id);
-      move(el.id);
-      if(!isPhantascopeUp)
-      {
-        phantascope_up();
-        isPhantascopeUp = true;
-      }
-      play();
-  }, Math.floor(Math.random() * 1) + 1);
+    var el = add();
+    init_move(el.id);
+    setTimeout(function(){
+      counter_up();
+    }, 200);
+    move(el.id);
+    if(!isPhantascopeUp)
+    {
+      phantascope_up();
+      isPhantascopeUp = true;
+    }
+    counter_up();
+    play();
+  }, Math.floor(Math.random() * 2000) + 500);
 
   // phantascope開始用method
   function play()
   {
-      $('.sprite').phantascope('play');
+    $('.sprite').phantascope('play');
   }
 
   // 背景変更method
