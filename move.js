@@ -85,30 +85,14 @@ $(document).ready(function()
   }
 
   // 一時的な村人追加用method
-  function exec_human(el)
-  {
-    counter_up('human');
-    el.classList.add("human");
-  }
-  function exec_zombie(el)
-  {
-    counter_up('zombie');
-    el.classList.add("zombie");
-  }
-  function execute()
+  function execute(category)
   {
     if(isPlay)
     {
       var el = add();
       init_move(el.id);
-      if((Math.floor(Math.random() * 2))  === 1 )
-      {
-        exec_human(el);
-      }
-      else
-      {
-        exec_zombie(el);
-      }
+      counter_up(category);
+      el.classList.add(category);
       move(el.id);
       if(!isPhantascopeUp)
       {
@@ -120,7 +104,12 @@ $(document).ready(function()
   }
   setInterval(function()
   {
-    execute();
+    var category = 'human';
+    if((Math.floor(Math.random() * 2))  === 1 )
+    {
+      category = 'zombie';
+    }
+    execute(category);
   }, Math.floor(Math.random() * 4000) + 500);
 
   // phantascope開始用method
