@@ -16,6 +16,11 @@ var locationSub = navigator.vehicle.location.subscribe(function(location) {
   }
   // addMarker2(gVehicleSpeed, gEngineSpeed, location.latitude, location.longitude);
 });
+//アクセルペダルAPI
+var accPedal;
+var accPedalSub = navigator.vehicle.acceleratorPedalPosition.subscribe(function(obj) {
+  accPedal = obj.value;
+});
 
 //速度API
 var gVehicleSpeed = 0, gEngineSpeed = 0;

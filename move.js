@@ -10,6 +10,8 @@ $(document).ready(function()
   var parent = document.getElementById('parent');
   var isPlay = false;
 
+  var acc2, accbefore2;
+
   function phantascope_up()
   {
     $('.sprite').phantascope({
@@ -105,11 +107,25 @@ $(document).ready(function()
   setInterval(function()
   {
     var category = 'human';
-    if((Math.floor(Math.random() * 2))  === 1 )
-    {
-      category = 'zombie';
+    // if((Math.floor(Math.random() * 2))  === 1 )
+    // {
+    //   category = 'zombie';
+    // }
+    acc2 = accPedal;
+
+    if(acc2 - accbefore2 >= 10){
+      console.log('急発進');
+      // addMessage('急発進');
+
+      execute('zombie');
+    }else if(awakeness !== 0 && awakeness <= 40){
+      console.log('起きろ！！');
+      execute('zombie');
+    }else{
+      execute(category);
     }
-    execute(category);
+    accbefore2 = acc2;
+
   }, Math.floor(Math.random() * 4000) + 500);
 
   // phantascope開始用method
@@ -135,11 +151,11 @@ $(document).ready(function()
         isPlay = true;
         setTimeout(function(){
           game_over();
-        }, (2 * 60 * 1000) / 100);
+        }, (2 * 60 * 1000));
       });
     }, 300);
   });
-  
+
 
   function game_over(){
     isPlay = false;
@@ -156,32 +172,7 @@ $(document).ready(function()
     $('.game-result').fadeIn('slow').delay(300).queue(function(){
       $('.game-result-title').fadeIn('slow').delay(300).queue(function(){
         $('.result-human').fadeIn('slow').delay(300).queue(function(){
-          $('.result-zombie').fadeIn('slow').delay(300).queue(function(){ //TODO時間調整
-            $('.game-result-title').hide();
-            $('.result-human').hide();
-            $('.result-zombie').hide().delay(100);
-            chara_introduction();
-          });
-        });
-      });
-    });
-  }
-
-  function chara_introduction(){
-    $('.chara-introduction-icon-sizing').phantascope({
-      fps: 10,
-      loop: "*",
-      layout: [3, 3, 3, 1],
-      animationPoints:[[1,1],[1,4]],
-      autostart: true
-    });
-    $('.chara-introduction-icon-sizing').phantascope('play');
-    $('.chara-introduction').fadeIn('slow').delay(300).queue(function(){
-      $('.chara-introduction-title').fadeIn('slow').delay(300).queue(function(){
-        $('.chara-introduction-human-box').fadeIn('slow').delay(300).queue(function(){
-          $('.chara-introduction-zombie-box').fadeIn('slow').delay(300).queue(function(){
-            
-          });
+          $('.result-zombie').fadeIn('slow').delay(5000);
         });
       });
     });
