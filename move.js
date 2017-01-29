@@ -129,13 +129,15 @@ $(document).ready(function()
 
   $('.bt-start').click(function(event)
   {
-    $('.cover').fadeOut(1000).delay(300).queue(function()
-    {
-      isPlay = true;
-      setTimeout(function(){
-        game_over();
-      }, (2 * 60 * 1000) / 10);
-    });
+    setTimeout(function(){
+      $('.cover').fadeOut(1000).delay(300).queue(function()
+      {
+        isPlay = true;
+        setTimeout(function(){
+          game_over();
+        }, (2 * 60 * 1000) / 10);
+      });
+    }, 300);
   });
   
 
