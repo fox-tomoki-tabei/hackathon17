@@ -9,11 +9,14 @@ $(document).ready(function()
   var isPhantascopeUp = false;
   var parent = document.getElementById('parent');
   var isPlay = false;
+  // 現在の背景画像、デフォルトは1
+  var nowBackgroundImg = 'bg1';
 
   var acc2, accbefore2;
   var distancebefore;
   var michelcount = 0;
 
+  // phantascopeの起動(ゲーム開始時の初回起動分)
   function phantascope_up()
   {
     $('.sprite').phantascope({
@@ -33,7 +36,7 @@ $(document).ready(function()
     var el = document.createElement('div');
     el.classList.add("sprite");
     el.id = ids.length + 1;
-    if(ids.length === 100)
+    if(count.human === 200)
     {
       bg_change();
     }
@@ -48,6 +51,14 @@ $(document).ready(function()
     {
       count[category] ++;
       document.getElementById(category + '-counter').innerHTML = count[category];
+      if(count.zombie === 10 && nowBackgroundImg !== 'bg3')
+      {
+        $('.'+ nowBackgroundImg).fadeOut('slow', function()
+        {
+          $('.bg3').fadeIn('slow');
+          nowBackgroundImg = 'bg3';
+        });
+      }
     }, 200);
   }
   // 村人追加時  の空から降ってくる挙動
@@ -143,9 +154,11 @@ $(document).ready(function()
     $('.bg1').fadeOut('slow', function()
     {
       $('.bg2').fadeIn('slow');
+      nowBackgroundImg = 'bg2';
     });
   }
 
+  // 開始ボタン
   $('.bt-start').click(function(event)
   {
     setTimeout(function(){
@@ -154,12 +167,12 @@ $(document).ready(function()
         isPlay = true;
         setTimeout(function(){
           game_over();
-        }, (2 * 60 * 1000));
+        }, (1.5 * 60 * 1000));
       });
     }, 300);
   });
 
-
+  // ゲーム終了処理
   function game_over(){
     isPlay = false;
     $('.result-icon-sizing').phantascope({
@@ -175,7 +188,7 @@ $(document).ready(function()
     $('.game-result').fadeIn('slow').delay(300).queue(function(){
       $('.game-result-title').fadeIn('slow').delay(300).queue(function(){
         $('.result-human').fadeIn('slow').delay(300).queue(function(){
-          $('.result-zombie').fadeIn('slow').delay(300).queue(function(){ //TODO時間調整
+          $('.result-zombie').fadeIn('slow').delay(3500).queue(function(){ //TODO時間調整
             $('.game-result-title').hide();
             $('.result-human').hide();
             $('.result-zombie').hide().delay(100);
@@ -186,6 +199,7 @@ $(document).ready(function()
     });
   }
 
+  // キャラ紹介
   function chara_introduction(){
     $('.chara-introduction-icon-sizing').phantascope({
       fps: 10,
@@ -198,11 +212,19 @@ $(document).ready(function()
     $('.chara-introduction').fadeIn('slow').delay(300).queue(function(){
       $('.chara-introduction-title').fadeIn('slow').delay(300).queue(function(){
         $('.chara-introduction-human-box').fadeIn('slow').delay(300).queue(function(){
-          $('.chara-introduction-zombie-box').fadeIn('slow').delay(300).queue(function(){
-
+          $('.chara-introduction-zombie-box').fadeIn('slow').delay(3500).queue(function(){
+            $('.chara-introduction').hide().delay(100);
+            setTimeout(function(){
+              finish();
+            },400);
           });
         });
       });
     });
+  }
+
+  //締めの句
+  function finish(){
+      $('.finish').fadeIn(1500);
   }
 });
