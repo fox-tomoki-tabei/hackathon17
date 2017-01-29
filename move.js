@@ -181,7 +181,7 @@ $(document).ready(function()
     $('.game-result').fadeIn('slow').delay(300).queue(function(){
       $('.game-result-title').fadeIn('slow').delay(300).queue(function(){
         $('.result-human').fadeIn('slow').delay(300).queue(function(){
-          $('.result-zombie').fadeIn('slow').delay(1).queue(function(){ //TODO時間調整
+          $('.result-zombie').fadeIn('slow').delay(3500).queue(function(){ //TODO時間調整
             $('.game-result-title').hide();
             $('.result-human').hide();
             $('.result-zombie').hide().delay(100);
@@ -205,8 +205,11 @@ $(document).ready(function()
     $('.chara-introduction').fadeIn('slow').delay(300).queue(function(){
       $('.chara-introduction-title').fadeIn('slow').delay(300).queue(function(){
         $('.chara-introduction-human-box').fadeIn('slow').delay(300).queue(function(){
-          $('.chara-introduction-zombie-box').fadeIn('slow').delay(1).queue(function(){
-            finish();
+          $('.chara-introduction-zombie-box').fadeIn('slow').delay(3500).queue(function(){
+            $('.chara-introduction').hide().delay(100);
+            setTimeout(function(){
+              finish();
+            },400);
           });
         });
       });
@@ -215,8 +218,6 @@ $(document).ready(function()
 
   //締めの句
   function finish(){
-    $('.chara-introduction').fadeOut(1000).delay(300).queue(function(){
-      $('.finish').fadeIn('slow');
-    });
+      $('.finish').fadeIn(1500);
   }
 });
