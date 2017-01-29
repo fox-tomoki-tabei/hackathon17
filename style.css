@@ -9,9 +9,9 @@ body{
 }
 .bt-start {
   background: -webkit-gradient(linear, left top, left bottom, from(#d06262), to(#6d0101));
-  box-shadow: 0 0 8px #d4b2b2 inset;
   border: 0.05em solid #FFF;
   border-radius: 0.23em;
+  box-shadow: 0 0 8px #d4b2b2 inset;
   color: #FFF;
   font-family: serif;
   font-size: 3.5em;
@@ -25,9 +25,9 @@ body{
   width: 60%;
 }
 .bt-start:hover {
-  color: #FFF;
   background: -webkit-gradient(linear, left top, left bottom, from(#6d0101), to(#d06262));
   box-shadow: 0 0 26px #6d0101 inset;
+  color: #FFF;
   text-shadow: none;
 }
 .content{
@@ -35,19 +35,28 @@ body{
   position: relative;
   width: 100%;
 }
-.cover {
+.cover, .game-result {
   background-color: rgba(0, 0, 0, 0.6);
   height: 100%;
   position: absolute;
   top: 0;
   width: 100%;
 }
+.game-result {
+  color: #FFF;
+}
 .inner-cover{
-  position: relative;
   height: 100%;
+  position: relative;
   width: 100%;
 }
-.title {
+.inline {
+  display: inline-block;
+}
+.title, .game-result-title {
+  background-color: rgba(51, 51, 51, 0.8);
+  border-top: 1px solid #FFF;
+  border-bottom: 1px solid #FFF;
   color: #FFF;
   font-family: serif;
   font-size: 7em;
@@ -58,9 +67,10 @@ body{
   text-shadow:  0 0 1.5em #ffffff, 0 0 1px #000, 0 0 14px #ff1e1e;
   top: 32%;
   width: 100%;
-  border-top: 1px solid #FFF;
-  border-bottom: 1px solid #FFF;
-  background-color: rgba(51, 51, 51, 0.8);
+}
+.game-result-title {
+  top: 13%;
+  font-size: 6em;
 }
 .header, .footer {
   background-color: #333;
@@ -102,7 +112,7 @@ body{
 .footer .counter-box {
   display: inline-block;
 }
-.footer #human-counter, .footer #zombie-counter {
+.footer #human-counter, .footer #zombie-counter, #game-result-human, #game-result-zombie {
   font-size: 2em;
 }
 .bg1 {
@@ -130,6 +140,28 @@ body{
   transform : scaleX(-1);
   transform-origin : scaleX(-1);
 }
+.result-human {
+  height: 13%;
+  left: 25%;
+  position: absolute;
+  top: 33%;
+  width: 50%;
+}
+.result-zombie {
+  height: 13%;
+  left: 25%;
+  position: absolute;
+  top: 55%;
+  width: 50%;
+}
+div.result-icon-sizing {
+  background-repeat: no-repeat;
+  background-size: 600px;
+  bottom: 0;
+  height: 150px;
+  position: absolute;
+  width: 200px;
+}
 .sprite {
   background-repeat: no-repeat;
   background-size: 320px;
@@ -137,6 +169,13 @@ body{
   height: 80px;
   position: absolute;
   width: 106.666667px;
+}
+.game-result-counter-box{
+  font-size: 3em;
+  height: 100%;
+  position: absolute;
+  right: 32%;
+  top: 8%;
 }
 .human {
   background-image: url(http://localhost:4000/img.png);

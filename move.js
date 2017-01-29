@@ -46,7 +46,7 @@ $(document).ready(function()
       document.getElementById(category + '-counter').innerHTML = count[category];
     }, 200);
   }
-  // 村人追加時の空から降ってくる挙動
+  // 村人追加時  の空から降ってくる挙動
   function init_move(id)
   {
     var left = Math.floor(Math.random() * 91);
@@ -132,7 +132,31 @@ $(document).ready(function()
     $('.cover').fadeOut(1000).delay(300).queue(function()
     {
       isPlay = true;
+      setTimeout(function(){
+        game_over();
+      }, (2 * 60 * 1000) / 10);
     });
   });
+  
 
+  function game_over(){
+    isPlay = false;
+    $('.result-icon-sizing').phantascope({
+      fps: 10,
+      loop: "*",
+      layout: [3, 3, 3, 1],
+      animationPoints:[[1,1],[1,4]],
+      autostart: true
+    });
+    document.getElementById('game-result-human').innerHTML = count.human;
+    document.getElementById('game-result-zombie').innerHTML = count.zombie;
+    $('.result-icon-sizing').phantascope('play');
+    $('.game-result').fadeIn('slow').delay(300).queue(function(){
+      $('.game-result-title').fadeIn('slow').delay(300).queue(function(){
+        $('.result-human').fadeIn('slow').delay(300).queue(function(){
+          $('.result-zombie').fadeIn('slow').delay(5000);
+        });
+      });
+    });
+  }
 });
