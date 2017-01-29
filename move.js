@@ -11,6 +11,8 @@ $(document).ready(function()
   var isPlay = false;
 
   var acc2, accbefore2;
+  var distancebefore;
+  var michelcount = 0;
 
   function phantascope_up()
   {
@@ -31,7 +33,7 @@ $(document).ready(function()
     var el = document.createElement('div');
     el.classList.add("sprite");
     el.id = ids.length + 1;
-    if(ids.length === 300)
+    if(ids.length === 100)
     {
       bg_change();
     }
@@ -104,25 +106,26 @@ $(document).ready(function()
       play();
     }
   }
+  // まいけるくん用
+  setInterval(function(){
+    if(distance >= michelcount * 5){
+      execute('human');
+      michelcount++;
+    }
+  }, 100);
+
+  //ゾンビ用
   setInterval(function()
   {
     var category = 'human';
-    // if((Math.floor(Math.random() * 2))  === 1 )
-    // {
-    //   category = 'zombie';
-    // }
     acc2 = accPedal;
 
-    if(acc2 - accbefore2 >= 10){
+    if(gVehicleSpeed <= 15 && acc2 - accbefore2 >= 10){
       console.log('急発進');
-      // addMessage('急発進');
-
       execute('zombie');
-    }else if(awakeness !== 0 && awakeness <= 40){
-      console.log('起きろ！！');
+    }else if(awakeness !== 0 && awakeness <= 50){
+      console.log('起きて！！');
       execute('zombie');
-    }else{
-      execute(category);
     }
     accbefore2 = acc2;
 
@@ -196,7 +199,7 @@ $(document).ready(function()
       $('.chara-introduction-title').fadeIn('slow').delay(300).queue(function(){
         $('.chara-introduction-human-box').fadeIn('slow').delay(300).queue(function(){
           $('.chara-introduction-zombie-box').fadeIn('slow').delay(300).queue(function(){
-            
+
           });
         });
       });
