@@ -172,7 +172,32 @@ $(document).ready(function()
     $('.game-result').fadeIn('slow').delay(300).queue(function(){
       $('.game-result-title').fadeIn('slow').delay(300).queue(function(){
         $('.result-human').fadeIn('slow').delay(300).queue(function(){
-          $('.result-zombie').fadeIn('slow').delay(5000);
+          $('.result-zombie').fadeIn('slow').delay(300).queue(function(){ //TODO時間調整
+            $('.game-result-title').hide();
+            $('.result-human').hide();
+            $('.result-zombie').hide().delay(100);
+            chara_introduction();
+          });
+        });
+      });
+    });
+  }
+
+  function chara_introduction(){
+    $('.chara-introduction-icon-sizing').phantascope({
+      fps: 10,
+      loop: "*",
+      layout: [3, 3, 3, 1],
+      animationPoints:[[1,1],[1,4]],
+      autostart: true
+    });
+    $('.chara-introduction-icon-sizing').phantascope('play');
+    $('.chara-introduction').fadeIn('slow').delay(300).queue(function(){
+      $('.chara-introduction-title').fadeIn('slow').delay(300).queue(function(){
+        $('.chara-introduction-human-box').fadeIn('slow').delay(300).queue(function(){
+          $('.chara-introduction-zombie-box').fadeIn('slow').delay(300).queue(function(){
+            
+          });
         });
       });
     });
