@@ -158,15 +158,15 @@ body{
   width: 50%;
 }
 .chara-introduction-human-box {
-  height: 35%;
+  height: 26%;
   position: absolute;
-  top: 15%;
+  top: 24%;
   width: 100%;
 }
 .chara-introduction-zombie-box {
-  height: 35%;
+  height: 26%;
   position: absolute;
-  top: 50%;
+  top: 55%;
   width: 100%;
 }
 div.result-icon-sizing {
@@ -205,10 +205,12 @@ div.chara-introduction-icon-sizing {
 .chara-info {
   position: absolute;
   right: 0;
-  top: 53%;
+  top: 0;
   width: 55%;
+  height: 100%;
 }
 .chara-name {
+  font-family: Hiragino Kaku Gothic StdN;
   font-size: 3em;
 }
 .caption {
