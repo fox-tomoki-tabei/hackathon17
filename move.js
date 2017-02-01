@@ -123,6 +123,8 @@ $(document).ready(function()
       execute('human');
       michelcount++;
     }
+    // ↓↓ APIつながない場合
+    // execute('human');
   }, 100);
 
   //ゾンビ用
@@ -139,7 +141,13 @@ $(document).ready(function()
       execute('zombie');
     }
     accbefore2 = acc2;
-
+    // ↓↓ APIつながない場合
+    // var random = Math.floor(Math.random() * 2);
+    // if(random === 1){
+    //   execute('zombie');
+    // }else {
+    //   execute('human');
+    // }
   }, Math.floor(Math.random() * 4000) + 500);
 
   // phantascope開始用method
